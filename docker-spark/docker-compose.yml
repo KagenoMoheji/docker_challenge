@@ -13,14 +13,13 @@ services:
         HADOOP_VERSION: ${HADOOP_VERSION}
         PYTHON_VERSION: ${PYTHON_VERSION}
     image: spark-driver
+    container_name: spark-driver
     volumes:
-      # ノード間の共有ディレクトリ？
-      - ./docker/spark/shared-workspace:/opt/workspace
-      # Driverノードにだけ開発ディレクトリマウントしておく
-      # - ./src:/src
+      - shared-workspace:${SHARED_WORKSPACE_CONTAINER}
     ports:
       - 4040:4040
       - 8080:8080
+      # - 7077:7077
     command:
       "/spark/bin/spark-class org.apache.spark.deploy.master.Master -h 0.0.0.0"
 
@@ -34,16 +33,48 @@ services:
         HADOOP_VERSION: ${HADOOP_VERSION}
     image: spark-worker
     volumes:
-      # ノード間の共有ディレクトリ？
-      - ./docker/spark/shared-workspace:/opt/workspace
+      - shared-workspace:${SHARED_WORKSPACE_CONTAINER}
     depends_on:
       - spark-driver
     ports:
       # 下記の書き方で，左のポート範囲のうち使用可能なポートを選択してくれる．
       # つまり「8081-8089」なら9つまでのワーカーノードを作成できることを意味する．
-      - 8081-8089:8081
+      - 8081-${SPARK_WORKER_PORT_END}:8081
     command:
       # 「spark://XXX」のXXXにはdriver(master)ノードのサービス名を指定．
       "/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-driver:7077 -h 0.0.0.0 -c ${SPARK_WORKER_CORES} -m ${SPARK_WORKER_MEMORY}"
+  
+  jupyterlab:
+    build:
+      context: .
+      dockerfile: ./docker/jupyterlab/Dockerfile
+      args:
+        SPARK_VERSION: ${SPARK_VERSION}
+        PYTHON_VERSION: ${PYTHON_VERSION}
+        JAVA_VERSION: ${JAVA_VERSION}
+        SCALA_VERSION: ${SCALA_VERSION}
+        USE_GPU: ${USE_GPU}
+        SHARED_WORKSPACE_CONTAINER: ${SHARED_WORKSPACE_CONTAINER}
+        SHARED_WORKSPACE_HOST: ${SHARED_WORKSPACE_HOST}
+    image: jupyterlab
+    container_name: jupyterlab
+    volumes:
+      - shared-workspace:${SHARED_WORKSPACE_CONTAINER}
+    ports:
+      # 8080〜はdriverとworkerが使用しているので被らないように…
+      - 8000:8000
+    command:
+      "jupyter lab --ip=0.0.0.0 --port=8000 --no-browser --allow-root --NotebookApp.token="
+    tty: true
 
+volumes:
+    # ノード間の共有ディレクトリ？今回は./srcを使う．
+    shared-workspace:
+      # driver_optsを使うことでdocker-compose downやdocker volume pruneしてもボリュームが残るらしい
+      driver_opts:
+        type: none
+        device:
+          # カレントディレクトリでマウントするディレクトリを指定．ここでは"./${SHARED_WORKSPACE_HOST}"．
+          $PWD/${SHARED_WORKSPACE_HOST}
+        o: bind # TODO: これだとコンテナ側から生成された物が，ホスト側ではロックかかった状態になる…
 

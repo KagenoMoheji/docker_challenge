@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+mecab-python3
+janome
+fasttext
+
+# tensorflow
+
+
