@@ -1,14 +1,3 @@
 .history/
 .vscode/
 .DS_Store
-
-# Scala
-*.class
-.settings/
-target/
-project/
-.project
-.classpath
-
-# Pythoon
-Pipfile.lock
