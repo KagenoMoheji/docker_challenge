@@ -1,6 +1,6 @@
 import { useState } from "react";
 import reactLogo from "~/assets/svg/react.svg";
-// import "styled-components"; // cssはmacroとbabelを併用しないといけないらしくこれは使えないっぽい．
+// import { css } "styled-components"; // cssはmacroとbabelを併用しないといけないらしくこれは使えないっぽい．
 import { css } from "styled-components/macro";
 
 function App(): JSX.Element {
