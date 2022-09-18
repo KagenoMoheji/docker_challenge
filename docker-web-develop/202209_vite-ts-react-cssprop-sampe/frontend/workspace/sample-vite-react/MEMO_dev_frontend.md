@@ -50,6 +50,7 @@
 - [x] SCSS/TailwindCSS導入
 - [ ] なんかpublicからiconが読み込めてないぞ～～
     - わからん
+    - `npm run build`したものは読み込めてる．`npm run dev`のときだけ．
 - [ ] Storybook導入
     - 無理ぃ
     - tailwindcssやcss prop(styled-components)とかのCSSライブラリの対応できて無さそう
