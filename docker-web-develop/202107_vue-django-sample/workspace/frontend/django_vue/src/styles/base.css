@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    width: 100%;
+    height: 100%;
+    /*
+    最後に総称フォントを指定しないとstylelintでエラーになる
+    https://willcloud.jp/knowhow/font-family/#h4_08
+    */
+    font-family: "メイリオ", "Arial", sans-serif;
+    font-size: 16px;
+    background-color: #fff;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* height: 100％; */
+    min-height: 100vh;
+    background: #fff;
+}
+
+/* div {
+    display: block;
+} */
+
+.reset-btn {
+    /*
+    buttonの装飾を無効化
+    https://qiita.com/nabettu/items/1593af04e48444c45c53
+    */
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 0;
+    appearance: none;
+}
+
+.flex-mid {
+    display: flex;
+    justify-content: center;
+}
+
+.flexW {
+    /*
+    display:flexを持つ要素の子要素にこのクラスを適用すると
+    可変長幅の子要素ができる。
+    固定長幅の子要素にする場合は、ダミーだけど.fixedWを適用して、
+    適用した要素の子要素のwidthにpxを指定。
+    */
+    flex: 1;
+}
+.fixedW {/* ダミー */}

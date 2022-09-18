@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+    dev:
+        build:
+            context: .
+            dockerfile: ./docker/dev/Dockerfile
+            args:
+                APPNAME: ${APPNAME}
+                SHARED_WORKSPACE_HOST: ${SHARED_WORKSPACE_HOST}
+                SHARED_WORKSPACE_CONTAINER: ${SHARED_WORKSPACE_CONTAINER}
+                NODE_VERSION: ${NODE_VERSION}
+                PYTHON_VERSION: ${PYTHON_VERSION}
+        image: ${APPNAME}
+        container_name: ${APPNAME}
+        ports:
+            # フロントエンドlocalhost用
+            - 8122:8122
+            # サーバサイドlocalhost用
+            - 8123:8123
+            # webpack-bundle-analyzer用
+            - 8765:8765
+        volumes:
+            - ./${SHARED_WORKSPACE_HOST}:${SHARED_WORKSPACE_CONTAINER}
+            # ---------------------------------------------------------------------------
+            # コンテナ側のnode_modulesディレクトリをホスト側に持ってこないようにする．
+            # https://stackoverflow.com/a/37898591
+            # なんかディレクトリ作られるけど，中身はホストへ共有されてない．まぁいいか…？
+            # でもこれをすると，ホスト側の開発でエラーの赤波線が出てしまう…
+            # - ${SHARED_WORKSPACE_CONTAINER}/frontend/node_modules/
+            # - ${SHARED_WORKSPACE_CONTAINER}/backend/node_modules/
+            # ---------------------------------------------------------------------------
+            # 下記は緊急編集用．
+            - ./docker/dev/python/tools:/opt/docker_tools/python
+            - ./docker/dev/nodejs/tools:/opt/docker_tools/nodejs
+            # ---------------------------------------------------------------------------
+        tty: true

@@ -1,0 +1,31 @@
+{
+    "env": {
+        // "browser": true, // いるかな？
+        // "commonjs": true, // いるかな？
+        "es2020": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/essential",
+        "plugin:prettier/recommended",
+        "@vue/prettier",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2020
+    },
+    "rules": {
+        "no-empty-character-class": "error",
+        "no-eval": ["error"],
+        "no-trailing-spaces": ["error"],
+        "no-unsafe-finally": "error",
+        "no-whitespace-before-property": "error",
+        "spaced-comment": ["error", "always"],
+        "brace-style": ["warn", "1tbs"], // if-else等の改行記法
+        "indent": ["error", 4, {"SwitchCase": 1}], // switch文のインデントの取り方もここで指定
+        "quotes": ["error", "double", {"avoidEscape": true}],
+        "semi": ["error", "always"],
+        "prettier/prettier": "error"
+    }
+}

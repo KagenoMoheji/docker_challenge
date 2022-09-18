@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+djangorestframework-jwt = "*"
+django-cors-headers = "*"
+django-filter = "*"
+pandas = "*"
+numpy = "*"
+requests = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+list = "python -m pip list"
+version = "python -V"
+django_prj = "django-admin startproject"
+django_app = "python manage.py startapp"
+migrate = "python manage.py migrate"
+launch_local = "python django_vue/manage.py runserver 0.0.0.0:8123"
+# 下記は動かしたこと無い
+launch_prod = "python django_vue/manage.py runserver 0.0.0.0:8123 --settings django_vue.settings.prod"

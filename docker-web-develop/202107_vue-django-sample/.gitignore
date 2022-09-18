@@ -1,0 +1,21 @@
+.DS_Store
+.history/
+.vscode/
+bk/
+**/logs/**/*.log
+
+db.sqlite3
+
+# NodeJS
+node_modules/
+webpack_build/
+
+# Python
+.venv/
+__pycache__/
+## Django
+### Djangoで自動生成されるシークレットキーやその他シークレット情報を格納するファイルはpushされないようにする．
+### pushするとしても，"secrets.py.txt"のようにファイルコピーして中身を消したものを用意すべし．
+### 本番環境では環境変数に登録してそこから読み込む．
+settings.py
+*secrets.py
