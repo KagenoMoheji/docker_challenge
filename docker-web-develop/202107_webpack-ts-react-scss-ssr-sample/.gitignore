@@ -1,0 +1,8 @@
+.history/
+.vscode/
+bk/
+dist/stats
+
+# NodeJS
+node_modules/
+webpack_build/

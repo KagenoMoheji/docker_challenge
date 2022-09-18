@@ -1,0 +1,24 @@
+// .a {
+//     background: #11f;
+// }
+
+.a {
+    background-color: #ff1;
+}
+
+.b {
+    .c {
+        background: #ff1;
+    }
+    #d {
+        font-size: 25px;
+    }
+}
+
+.b.e {
+    font-size: 60px;
+}
+
+// .b, #d {
+//     font-size: 19px;
+// }

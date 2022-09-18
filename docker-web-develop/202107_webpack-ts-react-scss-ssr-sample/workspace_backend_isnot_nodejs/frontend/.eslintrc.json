@@ -1,0 +1,49 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:prettier/recommended",
+        "prettier/@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "no-empty-character-class": "error",
+        "no-eval": ["error"],
+        "no-trailing-spaces": ["error"],
+        "no-unsafe-finally": "error",
+        "no-whitespace-before-property": "error",
+        "spaced-comment": ["error", "always"],
+        "brace-style": ["warn", "1tbs"], // if-else等の改行記法
+        "indent": ["error", 4, {"SwitchCase": 1}], // switch文のインデントの取り方もここで指定
+        "quotes": ["error", "double", {"avoidEscape": true}],
+        "semi": ["error", "always"],
+        "prettier/prettier": "error",
+        "@typescript-eslint/no-inferrable-types": "warn", // 自明な型アノテーションの除去については警告に留める
+        "@typescript-eslint/no-empty-interface": "warn"
+    },
+    "settings": {
+        // 「Warning: React version not specified in eslint-plugin-react settings.」非表示のため
+        "react": {
+            "version": "detect"
+        }
+    }
+}

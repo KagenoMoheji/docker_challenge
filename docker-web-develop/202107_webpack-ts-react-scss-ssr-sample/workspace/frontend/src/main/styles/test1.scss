@@ -1,0 +1,9 @@
+.a {
+    background: #222;
+}
+
+.b {
+    .c {
+        background: #f11;
+    }
+}
