@@ -407,8 +407,8 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
             "scripts": {
                 ...,
                 "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
-                "onefix:eslint": "eslint --fix",
-                "onefix:prettier": "prettier --write",
+                "fix:eslint": "eslint --fix",
+                "fix:prettier": "prettier --write",
             },
             ```
         1. Viteのビルド時に毎回静的解析が走るよう`vite.config.ts`に下記設定を追加
