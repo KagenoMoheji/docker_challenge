@@ -1,0 +1,8 @@
+// 公式の下記の書き方だとVSCodeから警告でまくる
+// // @tailwind base; // これ使うと装飾崩れまくる．tailwindcss専用の初期化処理でありtailwindcssのみ使い場合に限定して使うべきかも．
+// @tailwind components;
+// @tailwind utilities;
+
+// @import "tailwindcss/base"; // これ使うと装飾崩れまくる．tailwindcss専用の初期化処理でありtailwindcssのみ使い場合に限定して使うべきかも．
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";

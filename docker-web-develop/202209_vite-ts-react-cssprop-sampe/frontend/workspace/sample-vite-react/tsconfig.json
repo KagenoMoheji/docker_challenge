@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true, // https://qiita.com/kyntk/items/9c596306495aef06dbc0
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    // 以上が`npm create vite@latest`によるデフォで，以下がユーザ定義
+    "baseUrl": ".", // 後述のpathsの開始位置
+    "paths": { // コード上のimportパスを簡略化させる設定
+      // 厳密にはimportパスの解決はtsconfig.jsonではなくビルダーの設定ファイルの方が対応してる．
+      //// https://www.agent-grow.com/self20percent/2019/03/11/typescript-paths-work-careful/
+      "~\/*": ["./src/main/*"],
+      "~~\/*": ["./src/*"],
+      // "@\/*": ["./src/main/*"],
+      // "@@\/*": ["./src/*"],
+    },
+    "outDir": "./dist", // トランスパイル結果の出力先
+    "removeComments": true, // トランスパイル時にコメントアウトを消すか
+    "noImplicitAny": true, // 暗黙的なany型を禁ずるか
+    "noImplicitThis": true, // any型のthisを禁ずるか
+    "strictNullChecks": true, // 非null/undefined型へのnull/undefinedの代入を禁ずるか
+    "strictFunctionTypes": true, // 関数の引数型を厳密にチェックするか．ただしメソッドはその限りでないらしい．
+    "strictPropertyInitialization": true, // クラスプロパティの初期化を必須にするか
+    "noImplicitReturns": true, // 戻り値の型適用を厳密にチェックするか
+    "noUnusedLocals": true, // 未使用のローカル変数を禁ずるか
+    "noUnusedParameters": true, // 未使用の引数を禁ずるか
+    "exactOptionalPropertyTypes": true, // オプショナルプロパティへのundefinedの代入を禁ずるか
+    "noFallthroughCasesInSwitch": true, // case文で処理が空でない時のbreakを必須とするか
+    // "typeRoots": [ // 設定しなくても動いたのでコメントアウトしたままにしとく
+    //   "node_modules/@types",
+    //   "src/main/types"
+    // ],
+  },
+  "include": [
+    // "src" // デフォだが，一旦コメントアウト
+    // 以上が`npm create vite@latest`によるデフォで，以下がユーザ定義
+    // importパスの簡略化について下記設定も必要らしい
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+  ],
+  "exclude": [ // 上記チェックを適用しない場所
+    "node_modules",
+    "**/*.escapeCheck"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

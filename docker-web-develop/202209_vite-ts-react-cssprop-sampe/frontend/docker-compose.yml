@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  dev_frontend:
+    build:
+      context: .
+      dockerfile: ./docker/dev_frontend/Dockerfile
+      args:
+        APPNAME: ${APPNAME}
+        SHARED_WORKSPACE_HOST: ${SHARED_WORKSPACE_HOST}
+        SHARED_WORKSPACE_CONTAINER: ${SHARED_WORKSPACE_CONTAINER}
+        DOCKER_TOOLS_HOST: ${DOCKER_TOOLS_HOST}
+        NODE_VERSION: ${NODE_VERSION}
+    image: ${APPNAME}
+    container_name: ${APPNAME}
+    ports:
+      # フロントエンドlocalhost用
+      - 8001:8001
+      # Storybook用
+      - 8106:8106
+      # モックGraphQL用
+      - 8591:8591
+    volumes:
+      - ./${SHARED_WORKSPACE_HOST}:${SHARED_WORKSPACE_CONTAINER}
+      # ---------------------------------------------------------------------------
+      # コンテナ側のnode_modulesディレクトリをホスト側に持ってこないようにする．
+      # https://stackoverflow.com/a/37898591
+      # なんかディレクトリ作られるけど，中身はホストへ共有されてない．まぁいいか…？
+      # でもこれをすると，ホスト側の開発でエラーの赤波線が出てしまう…
+      # - ${SHARED_WORKSPACE_CONTAINER}/frontend/node_modules/
+      # - ${SHARED_WORKSPACE_CONTAINER}/backend/node_modules/
+      # ---------------------------------------------------------------------------
+    tty: true
