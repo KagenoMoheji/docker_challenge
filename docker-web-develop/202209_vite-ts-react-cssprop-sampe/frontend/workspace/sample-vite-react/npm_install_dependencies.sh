@@ -6,10 +6,13 @@ npm install --save-dev \
     # typescript \ # Viteアプリ立ち上げ時にデフォで入れられてたはず
     # https://minerva.mamansoft.net/Notes/%F0%9F%93%9DVite%E3%81%A7tsconfig.paths%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%8C%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%AA%E3%82%89%E3%81%AA%E3%81%84
     @types/node \
+    ts-node \
     # @types/react \ # Viteアプリ立ち上げ時にデフォで入れられてたはず
     # @types/react-dom \ # Viteアプリ立ち上げ時にデフォで入れられてたはず
     @types/jest \
-    @types/react-router-dom \
+    # `@types/react-router-dom`入れるとtscコマンドでバグるらしい．react-router-domに付随してるので不要になってる．
+    # https://zenn.dev/warugaki/scraps/ef03b3cc5a9f81
+    # @types/react-router-dom \
     # @types/react-redux \
     @types/styled-components
 
@@ -39,7 +42,6 @@ npm install --save-dev \
 # テスト関連
 npm install --save-dev \
     jest \
-    ts-node \
     ts-jest \
     jest-environment-jsdom \
     @testing-library/react \
