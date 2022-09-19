@@ -83,4 +83,5 @@ npm install --save-dev \
 # その他
 npm install \
     axios
-
+npm install --save-dev \
+    npm-check-updates
