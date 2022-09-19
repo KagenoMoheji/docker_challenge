@@ -1,4 +1,4 @@
-# NodeJS on docker-compose
+# Dockerコンテナ上でのフロントエンド開発の仕方
 
 ### 構成
 ```
@@ -11,6 +11,46 @@
     ├ workspace/
         ├ [開発する場所]
 ```
+
+##### もへじ構想
+```
+├ frontend/workspace/
+    ├ sample-app/ [Vueとかへの技術変更やアプリ追加するときはここのレベルでディレクトリ切る]
+        ├ package.json
+        ├ tsconfig.jsonとか設定
+        ├ node_modules/
+        ├ src
+            ├ main/
+                ├ index.html
+                ├ App.tsx
+                ├ components/
+                    ├ atoms/
+                    ├ molecules/
+                    ├ organisms/
+                    ├ templates/
+                    ├ pages/
+                ├ middlewares/
+                ├ routes/
+                ├ store/ [Reduxの考え方]
+                    ├ <状態名>/
+                        ├ state.ts
+                        ├ reducer.ts
+                        ├ action.ts
+                ├ api/
+                ├ utils/ [自作の汎用関数とかの実装]
+                ├ consts/ [設定値とかの定数の実装]
+                ├ styles/
+                ├ types/
+                ├ assets/
+            ├ __tests__/
+                ├ [Jestによるテストコードをここで実装]
+            ├ mock_graphql/
+                ├ [mainの本体コードにモックサーバのコードははいらないので，ここで分かれるイメージある．ここでGraphQLのモックコード作って，package.jsonでサーバ起動]
+        ├ public/
+        ├ dist/ [ここに出力したものをバックエンドコードに移管]
+        ├ outputs/
+```
+
 
 ### Dockerコンテナの使い方
 1. `{プロジェクト名(リポジトリ名)}/.env`の下記設定を必要あれば変更
@@ -39,17 +79,17 @@
     npm --version
     npx --version
     ```
-1. コンテナ停止は下記コマンド
+- コンテナ停止は下記コマンド
     ```
     docker-compose stop
     ```
-1. コンテナ再始動は下記コマンド
+- コンテナ再始動は下記コマンド
     ```
     docker-compose start
     ```
     - ただしコンテナに必要なnetworkやvolumeが削除されたなどすると起動できないので，[`docker-compose up -d`](#docker-compose-up)を再度やる必要あり．  
     この時はデータも初期化される．
-1. コンテナ削除は下記コマンド
+- コンテナ削除は下記コマンド
     ```
     docker-compose down
     docker rmi {2.のAPPNAMEで指定した文字列}
@@ -537,8 +577,7 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
 
                 // The glob patterns Jest uses to detect test files
                 testMatch: [
-                    "**/__tests__/**/*.[jt]s?(x)",
-                    "**/?(*.)+(spec|test).[tj]s?(x)"
+                    "**/__tests__/targets/**/*.[jt]s?(x)",
                 ],
 
                 // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -625,6 +664,12 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
                     };
                     ...
                     ```
+        - 動くけど「Could not find a declaration file for module '@jest/globals'.」と怒られることが気になるなら，型定義ファイル`{アプリ名}/src/main/types/@jest/globals/index.d.ts`を作成して下記を記載
+            ```
+            declare module "@jest/globals";
+            ```
+            - Ref
+                - https://qiita.com/kgtkr/items/2800e44803d9d11af1b8
     1. SCSS/styled-component(css prop)/TailwindCSSの導入
         - styled-componentを導入 ※SCSSでの実装の可能
             1. 下記ライブラリをインストール
@@ -994,12 +1039,88 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
     ```
     - ちょっと時間かかる…
     - `npm set progress false`によりプログレスバーが非表示になるが，インストールが高速になるらしい
-    - インストール後のVSCodeで構文エラーが出る場合はVSCodeを再起動する
+    - インストール後のVSCodeで「`d.ts`が読み込まれない」エラーが出る場合はVSCodeを再起動する
 1. ここまでで入らなかった依存ライブラリを，必要あれば手動インストール
 1. 開発モードでトランスパイルして動作確認
     ```
     npm run dev
     ```
 
+### その他環境構築
+##### モック用GraphQL
+1. `{アプリ名}/src/mock_graphql/`を作成
+1. これを参考にモック用GraphQLサーバ建てようとしてた
+    - https://www.apollographql.com/docs/apollo-server/testing/mocking/
+    - https://reffect.co.jp/vue/graphql-apollo-server-vue
+- いろんなクライアントツールがあるらしい…
+    - Refs
+        - https://user-first.ikyu.co.jp/entry/2022/07/01/121325
+        - https://nulab.com/ja/blog/nulab/graphql-apollo-relay-urql/
+        - https://suzukalight.com/blog/posts/2019-12-08-graphql-server
+        - https://qiita.com/jintz/items/4ddc6bf4f95238eff5e9#apollo-server-%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B
+- 他の構築方法
+    - CodeSandboxでApolloServerを立ち上げる(ログイン必要っぽい)
+        - Refs
+            - https://tech.fusic.co.jp/posts/mocking-graphql-server/
+    - 「Mock Service Worker」というモックサーバツールがあり，RestとGraphQLの両方に対応しているそうなのでこれもそのうち試してみたい
+        - MEMO
+            - 別プロセスとしての(Rest・GraphQL)サーバの起動が不要で，クライアント側コードの実行中においてその要求のたびにレスポンスを返すコードだけ走ってるっぽい．
+            - サーバ起動してないので，GraphiQL・GraphQL Playgroundような画面を出すのは無理かも
+        - Refs
+            - https://mswjs.io/docs/getting-started/mocks/graphql-api
+            - https://zenn.dev/yoshii0110/articles/fb5261b3ff6c6c
+            - https://zenn.dev/higuchimakoto/articles/d9865193910046
+            - https://www.miracleave.co.jp/contents/1816/front-end-development-msw-mocks/
+            - https://zenn.dev/sa2knight/scraps/13bf492debd5e1
+            - https://tech.smartshopping.co.jp/msw-graphql-test
+            - https://zenn.dev/higuchimakoto/articles/d9865193910046
+            - https://zenn.dev/ynakamura/articles/5d92bd34a363c6
+            - https://qiita.com/stake15/items/50476b986c8dab8d7fcf
+            - https://zenn.dev/azukiazusa/articles/using-msw-to-mock-frontend-tests
+            - https://zenn.dev/yuki_tu/articles/bdd942df59fb69
+    - graphql-toolsライブラリによるモックサーバ
+        - Refs
+            - https://www.graphql-tools.com/docs/mocking#mockserver
 
 
+
+### Vite&Reactのフロントエンド開発の進め方
+##### 開発
+1. `{アプリ名}/src/main/`下でコードを実装する
+1. 下記コマンドを実行して静的解析＆開発モードでプレビュー
+    ```
+    npm run dev
+    ```
+    - 静的解析(構文チェック)はTypeScript・スタイルの両方に対して走るので，エラーが出たらコードを修正する
+    - どうしてもエラー解消できない場合，チームメンバーに聞く
+        - それでも解消できない場合は静的解析のルールの見直し検討
+1. 下記コマンドを実行して本番コードをビルド
+    ```
+    npm run build
+    ```
+    - ここでも静的解析が走る
+    - VSCodeの拡張機能「Live Server」で出力されたHTMLを開いて動作確認できる
+    - ここで出力されたコードをバックエンドコードのtemplatesかstaticsあたりに置く感じ
+- ちなみに静的解析が走るコマンドは下記の通り
+    - スタイル・TypeScript両方
+        - `npm run dev`
+        - `npm run build`
+        - `npm run preview`
+    - TypeScriptのみ
+        - `npm run test`
+        - `npm run test:coverage`
+        - `npm run lint:eslint`
+    - スタイルのみ
+        - `npm run lint:style`
+
+
+##### テスト(単体・結合)
+1. フォルダ`{アプリ名}/src/__tests__/targets/{テスト作成日：yyyyMMdd}_{テスト概要}/`を作成し，その下でテストコードを実装
+1. 下記コマンドを実行してテスト実施
+    ```
+    npm run test
+    ```
+1. テスト結果に応じてフォルダ`{テスト作成日：yyyyMMdd}_{テスト概要}`を移動させてテスト対象から除外する
+    - テスト成功: `{アプリ名}/src/__tests__/done_completed/`
+    - テスト失敗: `{アプリ名}/src/__tests__/done_failed/`
+1. (念のため他の開発メンバーにテストパターンやテスト実施のダブルチェックしてもらう)
