@@ -131,7 +131,7 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
         cd {アプリ名}
         npm install (--save-dev) {ライブラリ名}
         ```
-        - TypeScript型系：@types/node
+        - TypeScript型系：@types/node，ts-node
         - Reactライブラリ：react-router-dom，redux
         - ビルド系：後述
         - 静的解析系：後述
@@ -486,7 +486,6 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
             npm install --save-dev \
                 jest \
                 ts-jest \
-                ts-node \
                 @types/jest \
                 jest-environment-jsdom \
                 @testing-library/jest-dom \
@@ -1032,6 +1031,21 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
         - publicフォルダとassetsフォルダのsvgをsvgフォルダに入れる
         - 「jsx内のsrcでpublicフォルダから読み込むもの」が画面に表示されない場合，相対パスへの手での書き換えが必要
             - 「HTMLファイル内のsrc・href」や「jsx内でメディアファイルをimportの上でsrcに指定しているもの」と違い，`vite.config.ts[base]="./"`が適用されてくれずビルド後のHTMLでメディアファイルが読み込まれないから．
+    1. TypeScriptをトランスパイル無しで実行したい場合があると思うので，実行できるよう簡易コマンドを`package.json`に追加
+        ```
+        "scripts": {
+            ...,
+            "ts": "npm run lint:eslint && node --loader ts-node/esm"
+        },
+        ```
+        - MEMO
+            - TypeScriptをトランスパイル無しで実行できる方法として`ts-node ～.ts`があるが，`package.json["type"]: "module"`のせいで「TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts"」というエラーが出ていた．
+                - 下記のように変更してが意味なかった．
+                    - 削除したり`commonjs`に変更して`ts-node ～.ts`で実行した場合，「SyntaxError: Unexpected token 'export'」と怒られる
+                        - Reactビルドへの影響は多分ないが．
+        - Refs
+            - https://zenn.dev/tak_iwamoto/articles/862527e69f544e
+            - https://github.com/TypeStrong/ts-node/issues/1062#issuecomment-1028139483
 1. アプリディレクトリに移動し，依存ライブラリをインストール
     ```
     cd {アプリ名}
@@ -1107,9 +1121,10 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
         - `npm run build`
         - `npm run preview`
     - TypeScriptのみ
+        - `npm run lint:eslint`
         - `npm run test`
         - `npm run test:coverage`
-        - `npm run lint:eslint`
+        - `npm run ts`
     - スタイルのみ
         - `npm run lint:style`
 
