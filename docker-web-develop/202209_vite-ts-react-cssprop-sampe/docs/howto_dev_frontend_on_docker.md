@@ -72,7 +72,8 @@
     docker-compose up -d
     docker exec -it {2.のAPPNAMEで指定した文字列} bash
     ```
-    - コンテナビルドが遅い場合は，`node_modules`や出力物のような巨大なコピーが発生している可能性あり．削除してからコンテナビルドすること．
+    - ~~コンテナビルドが遅い場合は，`node_modules`や出力物のような巨大なコピーが発生している可能性あり．削除してからコンテナビルドすること．~~
+        - `.dockerignore`に記載することで問題解消した．
 1. NodeJSのコマンドの動作確認
     ```
     node --version
@@ -88,7 +89,7 @@
     docker-compose start
     ```
     - ただしコンテナに必要なnetworkやvolumeが削除されたなどすると起動できないので，[`docker-compose up -d`](#docker-compose-up)を再度やる必要あり．  
-    この時はデータも初期化される．
+    この時はDB系コンテナのデータも初期化される．
 - コンテナ削除は下記コマンド
     ```
     docker-compose down
