@@ -1,0 +1,4 @@
+# https://stackoverflow.com/questions/53934579/docker-ignore-is-not-woking-well-with-docker-compose-and-my-file-structure/56511833#56511833
+**/node_modules
+**/dist
+**/outputs
