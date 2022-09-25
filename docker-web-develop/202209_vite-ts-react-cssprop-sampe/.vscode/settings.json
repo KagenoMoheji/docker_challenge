@@ -1,0 +1,42 @@
+{
+    // ViteアプリディレクトリとVSCodeチェッカーの認識合わせ的に調整する必要あり…．
+    "eslint.workingDirectories": [
+        // `.eslintrc.cjs`における「Parsing error: Cannot read file '<TO APP DIRECTORY>\tsconfig.json'」の解消のため
+        // https://zenn.dev/taichifukumoto/scraps/45be5ffdfa8457
+        "./frontend/workspace/official-site"
+    ],
+    "eslint.enable": true,
+    "eslint.format.enable": false,
+    "editor.tabSize": 4,
+    "[javascript]": {    
+        "editor.tabSize": 2,
+    },
+    "[typescript]": {    
+        "editor.tabSize": 2,
+    },
+    "[javascriptreact]": {    
+        "editor.tabSize": 2,
+    },
+    "[typescriptreact]": {    
+        "editor.tabSize": 2,
+    },
+    "[json]": {    
+        "editor.tabSize": 2,
+    },
+    "[css]": {    
+        "editor.tabSize": 2,
+    },
+    "[scss]": {    
+        "editor.tabSize": 2,
+    },
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "javascript.suggest.autoImports": false,
+    "typescript.suggest.autoImports": false,
+    "typescript.updateImportsOnFileMove.enabled": "never",
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "typescript.locale": "en",
+    // tailwindcssのディレクティブ「@tailwind」での警告を無視するため．
+    // でも「@import "tailwindcss/base"」という書き方にすればこの設定不要で済む．
+    // "scss.lint.unknownAtRules": "ignore"
+}
