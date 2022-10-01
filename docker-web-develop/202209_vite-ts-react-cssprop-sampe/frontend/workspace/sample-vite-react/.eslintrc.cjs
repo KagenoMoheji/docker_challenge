@@ -92,6 +92,7 @@ module.exports = {
     "**/node_modules/",
     "**/*.escapeCheck/", // lintしたくないコードを置く場所
     // "**/*.mdx", // Storybook用
+    "**/done_*", // 実施し終わったテストコードも一旦無視
   ],
   settings: {
     react: {

@@ -207,7 +207,8 @@ const config: Config = {
   //   "**/?(*.)+(spec|test).[tj]s?(x)"
   // ],
   testMatch: [
-    "**/__tests__/targets/**/*.[jt]s?(x)",
+    // "**/__tests__/targets/**/*.[jt]s?(x)",
+    "**/__tests__/targets/**/*.(js|jsx|ts|tsx)",
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
