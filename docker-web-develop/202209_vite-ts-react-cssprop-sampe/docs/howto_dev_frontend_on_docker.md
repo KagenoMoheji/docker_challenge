@@ -29,7 +29,7 @@
                     ├ organisms/
                     ├ templates/
                     ├ pages/
-                ├ middlewares/
+                ├ middlewares/ [あるいはplugins]
                 ├ routes/
                 ├ store/ [Reduxの考え方]
                     ├ <状態名>/
@@ -102,7 +102,7 @@
 
 ### NodeJS(Vite&TypeScript&React)のアプリディレクトリ作成
 1. Viteアプリディレクトリ未作成の場合は，(Dockerコンテナ上で)アプリディレクトリを作成する場所に移動して新規構築を進める．  
-Viteアプリディレクトリ作成済みの場合は2.に進む．
+Viteアプリディレクトリ作成済みの場合はここを飛ばす．
     1. 下記コマンドを実行．
         ```
         cd ({プロジェクト名(リポジトリ名)}/)workspace
@@ -1030,13 +1030,20 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
                 - `@storybook/addon-postcss`入れるんかな？入れたと思うけどな
     1. アプリコードをちょこちょこ変更
         - publicフォルダとassetsフォルダのsvgをsvgフォルダに入れる
+        - importパスをエイリアスに変更
+        - Reactコンポーネントごとのクラス名を`comp-{コンポーネント名}`に変更．
+            - テンプレートの場合は`tmpl-{テンプレート名}`になるかな．
         - 「jsx内のsrcでpublicフォルダから読み込むもの」が画面に表示されない場合，相対パスへの手での書き換えが必要
             - 「HTMLファイル内のsrc・href」や「jsx内でメディアファイルをimportの上でsrcに指定しているもの」と違い，`vite.config.ts[base]="./"`が適用されてくれずビルド後のHTMLでメディアファイルが読み込まれないから．
+        - ReactRouterDomと下記ディレクトリでルーティングのサンプル実装
+            - `{アプリ名}/src/main/components/pages/`
+            - `{アプリ名}/src/main/routes/`
     1. TypeScriptをトランスパイル無しで実行したい場合があると思うので，実行できるよう簡易コマンドを`package.json`に追加
         ```
         "scripts": {
             ...,
-            "ts": "npm run lint:eslint && node --loader ts-node/esm"
+            "ts": "npm run lint:eslint && node --loader ts-node/esm",
+            "ts:nolint": "node --loader ts-node/esm"
         },
         ```
         - MEMO
@@ -1047,14 +1054,28 @@ Viteアプリディレクトリ作成済みの場合は2.に進む．
         - Refs
             - https://zenn.dev/tak_iwamoto/articles/862527e69f544e
             - https://github.com/TypeStrong/ts-node/issues/1062#issuecomment-1028139483
-1. アプリディレクトリに移動し，依存ライブラリをインストール
+1. アプリディレクトリに移動し，rootユーザで依存ライブラリをインストール
     ```
     cd {アプリ名}
-    npm set progress false; npm install
+    npm install --verbose
     ```
-    - ちょっと時間かかる…
-    - `npm set progress false`によりプログレスバーが非表示になるが，インストールが高速になるらしい
+    - ちょっと時間かかる…(後述のプログレスバーを消さずの実行してもへじPCで20分)
+    - `npm set progress false; npm install`によりプログレスバーを非表示にして高速化する方法があるらしいが体感できていない
     - インストール後のVSCodeで「`d.ts`が読み込まれない」エラーが出る場合はVSCodeを再起動する
+1. 下記コマンドをrootユーザで実行
+    ```
+    chown node:node ./node_modules
+    ```
+    - 追加のライブラリインストールする場合，予めこれをやっておくとスムーズに行く
+    - すでにnodeユーザが所有者になっているかもだが，下記コマンドで確認可能
+        ```
+        ls -la ./node_modules
+        ```
+1. nodeユーザに切り替え
+    ```
+    su node
+    ```
+    - Dockerコンテナ上でライブラリインストール・静的解析・テスト・ビルドする際はnodeユーザにしておくとスムーズに行く
 1. ここまでで入らなかった依存ライブラリを，必要あれば手動インストール
 1. 開発モードでトランスパイルして動作確認
     ```
