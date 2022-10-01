@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "ts": "npm run lint:eslint && node --loader ts-node/esm",
+    "ts:nolint": "node --loader ts-node/esm",
     "dev": "npm run lint:style && vite",
     "build": "npm run lint:style && tsc && vite build",
     "preview": "npm run lint:style && vite preview",
@@ -23,7 +24,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.3",
-    "react-router-dom": "^6.4.0",
+    "react-router-dom": "^6.4.1",
     "redux": "^4.2.0",
     "styled-components": "^5.3.5"
   },
