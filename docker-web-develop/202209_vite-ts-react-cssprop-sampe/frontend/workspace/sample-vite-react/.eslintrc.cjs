@@ -80,6 +80,7 @@ module.exports = {
         ignore: ["css"],
       },
     ],
+    "object-shorthand": ["warn", "never"], // 連想配列のキーの省略はしないようにしよう
   },
   ignorePatterns: [
     // VSCodeによるアプリに関係ないコード(設定用など)の静的解析を無視させるために必要
