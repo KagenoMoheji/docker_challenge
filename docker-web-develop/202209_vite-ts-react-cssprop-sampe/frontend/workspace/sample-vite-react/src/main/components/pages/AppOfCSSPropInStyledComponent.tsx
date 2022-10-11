@@ -3,15 +3,18 @@ import reactLogo from "~/assets/svg/react.svg";
 // import { css } "styled-components"; // cssはmacroとbabelを併用しないといけないらしくこれは使えないっぽい．
 import { css } from "styled-components/macro";
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="App" css={scopedStyles.cssApp}>
+    <div className="comp-app-cssprop" css={scopedStyles.cssApp}>
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          {/* vite.config.tsのbaseで設定したPathが適用されてくれないので，一旦手動で「`/`=>`./`」の変更する． */}
-          <img src="./svg/vite.svg" className="logo" alt="Vite logo" />
+          {/*
+          vite.config.tsのbaseで設定したPathが適用されてくれないので，一旦手動で「`/`=>`./`」の変更する．
+          …と思ったがreact-routerを使い始めたら`/`じゃないと表示できなくなった．ルーティングのルートってことなんだろうが…．
+          */}
+          <img src="/svg/vite.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank" rel="noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
@@ -89,5 +92,3 @@ const scopedStyles = {
 }
 `,
 };
-
-export default App;

@@ -2,15 +2,18 @@ import { useState } from "react";
 import reactLogo from "~/assets/svg/react.svg";
 import styled from "styled-components";
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
   const [count, setCount] = useState(0);
 
   return (
-    <StyledScope className="App">
+    <StyledScope className="comp-app-styledcomp">
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          {/* vite.config.tsのbaseで設定したPathが適用されてくれないので，一旦手動で「`/`=>`./`」の変更する． */}
-          <img src="./svg/vite.svg" className="logo" alt="Vite logo" />
+          {/*
+          vite.config.tsのbaseで設定したPathが適用されてくれないので，一旦手動で「`/`=>`./`」の変更する．
+          …と思ったがreact-routerを使い始めたら`/`じゃないと表示できなくなった．ルーティングのルートってことなんだろうが…．
+          */}
+          <img src="/svg/vite.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://reactjs.org" target="_blank" rel="noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
@@ -79,5 +82,3 @@ const StyledScope = styled.div`
   color: #888;
 }
 `;
-
-export default App;

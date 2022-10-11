@@ -64,7 +64,7 @@ export default defineConfig(({command, mode, ssrBuild}) => {
       },
     },
     root: process.cwd(), // index.htmlがある場所ということらしい．デフォはカレントディレクトリかな
-    base: "./", // デフォは"/" // ローカルファイルまたはLiveServerなどローカルサーバで開くときは"./"にする必要あり
+    base: "/", // デフォは"/"．ReactRouterを使い始めたらこっちの絶対パスでビルドするべし． // ローカルファイルまたはLiveServerなどローカルサーバで開くときは"./"にする必要あり
     // publicDir: "public", // rootからの相対パス(たぶん)．デフォは"public"
     build: {
       outDir: "dist", // rootからの相対パス(たぶん)．デフォはdist

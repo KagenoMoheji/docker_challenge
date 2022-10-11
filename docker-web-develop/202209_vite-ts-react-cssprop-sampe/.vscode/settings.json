@@ -3,7 +3,7 @@
     "eslint.workingDirectories": [
         // `.eslintrc.cjs`における「Parsing error: Cannot read file '<TO APP DIRECTORY>\tsconfig.json'」の解消のため
         // https://zenn.dev/taichifukumoto/scraps/45be5ffdfa8457
-        "./frontend/workspace/official-site"
+        "./frontend/workspace/sample-vite-react"
     ],
     "eslint.enable": true,
     "eslint.format.enable": false,
@@ -36,6 +36,11 @@
     "typescript.updateImportsOnFileMove.enabled": "never",
     "javascript.updateImportsOnFileMove.enabled": "never",
     "typescript.locale": "en",
+    // 下記2つのliveServerの設定は，ReactRouter使用時のbuild成果物をLiveServerで表示できるために必要
+    "liveServer.settings.mount": [
+        ["/", "./frontend/workspace/sample-vite-react/dist"]
+    ],
+    "liveServer.settings.file": "./frontend/workspace/sample-vite-react/dist/index.html",
     // tailwindcssのディレクティブ「@tailwind」での警告を無視するため．
     // でも「@import "tailwindcss/base"」という書き方にすればこの設定不要で済む．
     // "scss.lint.unknownAtRules": "ignore"
