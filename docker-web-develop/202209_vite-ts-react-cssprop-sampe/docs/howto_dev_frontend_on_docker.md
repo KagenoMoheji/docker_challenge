@@ -1038,6 +1038,19 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
         - ReactRouterDomと下記ディレクトリでルーティングのサンプル実装
             - `{アプリ名}/src/main/components/pages/`
             - `{アプリ名}/src/main/routes/`
+            - ReactRouterDomのv6からComponentBasedに加えてObjectBasedの実装ができるようになっているらしい．個人的にVueRouterの経験からObjectBasedが好み．
+                - 一応`src/main/routes/index.tsx`に両方の実装をしておいてある．
+            - ReactRouterDomを使い始める場合，ルーティングやファイル読み込みにおいて相対パスから絶対パスに置き換えることを意識する必要あるらしい
+                - `vite.config.ts[base]="/"`でビルドする．"./"では通用しない．
+                - `vite build`で得られる成果物をVSCodeの拡張機能「LiveServer」で確認できるようにするには下記設定を`.vscode/settings.json`に追加する必要あり．
+                    ```
+                    {
+                        "liveServer.settings.mount": [
+                            ["/", "./frontend/workspace/<PJまたはアプリ名>/dist"]
+                        ],
+                        "liveServer.settings.file": "./frontend/workspace/<PJまたはアプリ名>/dist/index.html",
+                    }
+                    ```
     1. TypeScriptをトランスパイル無しで実行したい場合があると思うので，実行できるよう簡易コマンドを`package.json`に追加
         ```
         "scripts": {
@@ -1051,6 +1064,18 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
                 - 下記のように変更してが意味なかった．
                     - 削除したり`commonjs`に変更して`ts-node ～.ts`で実行した場合，「SyntaxError: Unexpected token 'export'」と怒られる
                         - Reactビルドへの影響は多分ないが．
+            - **TODO: importエイリアスの解決してもらうことがまだできてない・・・**
+                - https://kimuson.dev/blog/typescript/ts_node_esm_paths/
+                    - 一番有力だったがダメポ
+                - https://levelup.gitconnected.com/path-aliases-with-typescript-in-node-js-230803e3f200
+                - https://stackblitz.com/edit/node-z4b52r?file=package.json
+                    - module-aliasを使ってる
+                    - ダメポ
+                - https://mizchi.dev/202008081732-effect-by-tslib
+                    - tslibとimportHelper
+                    - ダメポ
+                - https://zenn.dev/xxpiyomaruxx/articles/8a5ca4c6a473bc#%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E8%A7%A3%E6%B6%88
+                    - ダメポ
         - Refs
             - https://zenn.dev/tak_iwamoto/articles/862527e69f544e
             - https://github.com/TypeStrong/ts-node/issues/1062#issuecomment-1028139483
