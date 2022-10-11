@@ -8,11 +8,14 @@
     - [Github](https://github.com/vitejs/vite/discussions/10070)に質問投げて一旦手で修正
 - [x] テスト環境構築
 - [x] SCSS/TailwindCSS導入
-- [ ] なんかpublicからiconが読み込めてないぞ～～
-    - わからん
-    - `npm run build`したものは読み込めてる．`npm run dev`のときだけ．
 - [ ] Storybook導入
     - 無理ぃ
     - tailwindcssやcss prop(styled-components)とかのCSSライブラリの対応できて無さそう
 - [x] 使いそうなReactライブラリインストール
 - [ ] GraphQLモック
+- [x] サンプルにReactRouterDom追加
+    - [x] ブラウザバックし易い実装
+    - ただ下記課題残ったかも
+        - build結果において`replace=false`のブラウザバック有効化が効いてない気がするな
+            - あれ，devでは`replace=false`，buildでは`replace=true`でブラウザバック有効になる…なんで逆…？
+        - favicon表示されない
