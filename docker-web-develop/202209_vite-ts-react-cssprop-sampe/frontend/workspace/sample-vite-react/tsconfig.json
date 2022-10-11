@@ -52,7 +52,7 @@
   "exclude": [ // 上記チェックを適用しない場所
     "node_modules",
     "**/*.escapeCheck",
-    // "**/done_*", // 実施し終わったテストコードも一旦無視
+    "**/done_*", // 実施し終わったテストコードはメインコードのビルド失敗につなげる邪魔をするのでここで無視．
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
