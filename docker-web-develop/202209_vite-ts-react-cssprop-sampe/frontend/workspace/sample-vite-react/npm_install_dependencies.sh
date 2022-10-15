@@ -14,7 +14,9 @@ npm install --save-dev \
     # https://zenn.dev/warugaki/scraps/ef03b3cc5a9f81
     # @types/react-router-dom \
     # @types/react-redux \
-    @types/styled-components
+    @types/styled-components \
+    @types/lodash \
+    @types/uuid
 
 # 静的解析関連
 npm install --save-dev \
@@ -84,6 +86,16 @@ npm install --save-dev \
 
 # その他
 npm install \
-    axios
+    axios \
+    lodash \
+    uuid
 npm install --save-dev \
     npm-check-updates
+## Apollo
+npm install \
+    @apollo/client
+npm install --save-dev \
+    apollo-server \
+    graphql \
+    msw
+
