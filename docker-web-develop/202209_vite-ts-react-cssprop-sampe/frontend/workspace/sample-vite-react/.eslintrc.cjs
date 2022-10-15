@@ -81,6 +81,13 @@ module.exports = {
       },
     ],
     "object-shorthand": ["warn", "never"], // 連想配列のキーの省略はしないようにしよう
+    "@typescript-eslint/type-annotation-spacing": [ // 型の前にスペース入れよう
+      "error",
+      {
+        "before": false,
+        "after": true,
+      }
+    ],
   },
   ignorePatterns: [
     // VSCodeによるアプリに関係ないコード(設定用など)の静的解析を無視させるために必要
