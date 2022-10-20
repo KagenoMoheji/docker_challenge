@@ -6,8 +6,8 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import * as CSSProp from "~/components/pages/AppOfCSSPropInStyledComponent";
-import * as StyledComponents from "~/components/pages/AppOfStyledComponent";
+import * as CSSProp from "~/components/pages/AppOfCSSPropInStyledComponent"; // TODO: ほんとはこの`* as`によるnamed exportの無意味化は良くない
+import * as StyledComponents from "~/components/pages/AppOfStyledComponent"; // TODO: ほんとはこの`* as`によるnamed exportの無意味化は良くない
 
 export const SamplesRouteElement = (): JSX.Element => {
   /*

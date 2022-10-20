@@ -1040,7 +1040,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
             - `{アプリ名}/src/main/routes/`
             - react-router-domのv6からComponentBasedに加えてObjectBasedの実装ができるようになっているらしい．個人的にVueRouterの経験からObjectBasedが好み．
                 - 一応`src/main/routes/index.tsx`に両方の実装をしておいてある．
-            - react-router-domを使い始める場合，ルーティングやファイル読み込みにおいて相対パスから絶対パスに置き換えることを意識する必要あるらしい
+            - react-router-domを使い始める場合，ルーティングや(publicディレクトリの)ファイル読み込みにおいて相対パスから絶対パスに置き換えることを意識する必要あるらしい．
                 - `vite.config.ts[base]="/"`でビルドする．"./"では通用しない．
                 - `vite build`で得られる成果物をVSCodeの拡張機能「LiveServer」で確認できるようにするには下記設定を`.vscode/settings.json`に追加する必要あり．
                     ```

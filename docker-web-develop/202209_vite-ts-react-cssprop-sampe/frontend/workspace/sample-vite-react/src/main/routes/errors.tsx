@@ -8,6 +8,14 @@ import {
 import {Error404} from "~/components/pages/Error404";
 
 export const ErrorsRouteElement = (): JSX.Element => {
+  /*
+  `/errors`にアクセスしている前提でのルーティング前のPathチェックを行う．
+  これにより，`/errors`でのアクセスで`<Outlet />`という空ページではなく404エラーページにリダイレクトさせるとか，認証必須ページへの遷移判定といった対応が可能になる．
+
+  - Refs
+    - https://blog.uhy.ooo/entry/2020-06-10/react-router-location/
+    - https://zenn.dev/horisan/articles/2aeaf0bd3fb70f
+  */
   const currPath = location.pathname;
   const regpttn = /^\/errors\/.+$/;
 
