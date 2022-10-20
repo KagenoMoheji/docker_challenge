@@ -12,10 +12,16 @@
     - 無理ぃ
     - tailwindcssやcss prop(styled-components)とかのCSSライブラリの対応できて無さそう
 - [x] 使いそうなReactライブラリインストール
-- [ ] GraphQLモック
 - [x] サンプルにReactRouterDom追加
     - [x] ブラウザバックし易い実装
     - ただ下記課題残ったかも
         - build結果において`replace=false`のブラウザバック有効化が効いてない気がするな
             - あれ，devでは`replace=false`，buildでは`replace=true`でブラウザバック有効になる…なんで逆…？
         - favicon表示されない
+    - [ ] Header+Outletの
+- [ ] GraphQLモック
+    - れんの方でできてないらしいこと
+        - importエイリアス付きでApolloとmswの両方起動
+        - resolver？をApolloとmswの2つ実装しないといけない件
+            - parentという引数の有無が分かれているらしいが・・・
+        - mutationが動いてない
