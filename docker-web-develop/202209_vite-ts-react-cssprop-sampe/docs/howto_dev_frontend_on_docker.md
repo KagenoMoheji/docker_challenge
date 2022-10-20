@@ -467,7 +467,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
                             // https://zenn.dev/nozomi_iida/articles/vite_type_error
                             typescript: true,
                             eslint: {
-                            lintCommand: "eslint 'src/**/*.{ts,tsx}'", // アプリコードをmainディレクトリに移動させたら'src/**/*.{ts,tsx}'から'src/main/**/*.{ts,tsx}'に変更
+                            lintCommand: "eslint 'src/**/*.{ts,tsx}'", // アプリコードをmainディレクトリに移動させたら'src/**/*.{ts,tsx}'から'src/main/**/*.{ts,tsx}'に変更すること．src下のmain以外はアプリ本体ではないモックサーバやテストコードなのでビルド時の構文チェックする必要ない．
                             // dev: {
                             //   logLevel: ["error"],
                             // },
@@ -1035,12 +1035,12 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
             - テンプレートの場合は`tmpl-{テンプレート名}`になるかな．
         - 「jsx内のsrcでpublicフォルダから読み込むもの」が画面に表示されない場合，相対パスへの手での書き換えが必要
             - 「HTMLファイル内のsrc・href」や「jsx内でメディアファイルをimportの上でsrcに指定しているもの」と違い，`vite.config.ts[base]="./"`が適用されてくれずビルド後のHTMLでメディアファイルが読み込まれないから．
-        - ReactRouterDomと下記ディレクトリでルーティングのサンプル実装
+        - react-router-domと下記ディレクトリでルーティングのサンプル実装
             - `{アプリ名}/src/main/components/pages/`
             - `{アプリ名}/src/main/routes/`
-            - ReactRouterDomのv6からComponentBasedに加えてObjectBasedの実装ができるようになっているらしい．個人的にVueRouterの経験からObjectBasedが好み．
+            - react-router-domのv6からComponentBasedに加えてObjectBasedの実装ができるようになっているらしい．個人的にVueRouterの経験からObjectBasedが好み．
                 - 一応`src/main/routes/index.tsx`に両方の実装をしておいてある．
-            - ReactRouterDomを使い始める場合，ルーティングやファイル読み込みにおいて相対パスから絶対パスに置き換えることを意識する必要あるらしい
+            - react-router-domを使い始める場合，ルーティングやファイル読み込みにおいて相対パスから絶対パスに置き換えることを意識する必要あるらしい
                 - `vite.config.ts[base]="/"`でビルドする．"./"では通用しない．
                 - `vite build`で得られる成果物をVSCodeの拡張機能「LiveServer」で確認できるようにするには下記設定を`.vscode/settings.json`に追加する必要あり．
                     ```
@@ -1110,6 +1110,16 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
 ### その他環境構築
 ##### モック用GraphQL
 1. `{アプリ名}/src/mock_graphql/`を作成
+1. 下記ライブラリをインストール
+    ```
+    npm install \
+        @apollo/client
+    npm install --save-dev \
+        apollo-server \
+        graphql \
+        msw
+    ```
+1. 
 1. これを参考にモック用GraphQLサーバ建てようとしてた
     - https://www.apollographql.com/docs/apollo-server/testing/mocking/
     - https://reffect.co.jp/vue/graphql-apollo-server-vue
