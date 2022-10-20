@@ -32,7 +32,7 @@ export default defineConfig(({command, mode, ssrBuild}) => {
         // https://zenn.dev/nozomi_iida/articles/vite_type_error
         typescript: true,
         eslint: {
-          lintCommand: "eslint 'src/main/*.{ts,tsx}'", // アプリコードをmainディレクトリに移動させたら'src/**/*.{ts,tsx}'から'src/main/**/*.{ts,tsx}'に変更すること．src下のmain以外はアプリ本体ではないモックサーバやテストコードなのでビルド時の構文チェックする必要ない．
+          lintCommand: "eslint 'src/main/**/*.{ts,tsx}'", // アプリコードをmainディレクトリに移動させたら'src/**/*.{ts,tsx}'から'src/main/**/*.{ts,tsx}'に変更すること．src下のmain以外はアプリ本体ではないモックサーバやテストコードなのでビルド時の構文チェックする必要ない．
           // dev: {
           //   logLevel: ["error"],
           // },
