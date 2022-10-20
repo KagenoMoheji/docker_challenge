@@ -56,6 +56,7 @@ export const Root = (): JSX.Element => {
   const Router = (): JSX.Element => useRoutes(routes) as JSX.Element;
   return (
     <BrowserRouter>
+      {/* TODO: ここでHeaderRouterテンプレートを呼んで，HeaderRouter内でOutlet使いたい */}
       <Router />
     </BrowserRouter>
   );

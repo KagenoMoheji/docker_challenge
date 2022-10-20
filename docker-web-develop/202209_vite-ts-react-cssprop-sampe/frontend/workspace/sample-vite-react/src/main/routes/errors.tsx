@@ -45,7 +45,6 @@ export const ErrorsRouteElement = (): JSX.Element => {
     // https://qiita.com/kobayang/items/88a104c0be28e16e65e8
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // TODO: このOutletをHeaderRouterテンプレートにして，HeaderRouter内でOutlet使いたい
   return <Outlet />;
 };
 
