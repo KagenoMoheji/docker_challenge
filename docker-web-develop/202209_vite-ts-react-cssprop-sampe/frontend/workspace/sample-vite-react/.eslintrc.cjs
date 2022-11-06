@@ -86,6 +86,12 @@ module.exports = {
       {
         "before": false,
         "after": true,
+        "overrides": {
+          arrow: { // アロー関数のアローの前後はスペース入れよう
+            before: true,
+            after: true
+          }
+        },
       }
     ],
   },
