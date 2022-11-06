@@ -1,0 +1,64 @@
+@import "~/plugins/styles/tailwindcss"; // tailwindcssを使わずstyled-components(css prop)を使うならこれをコメントアウト
+@import "~/styles/ovr-tailwindcss";
+
+/*
+[base.scssの実装ルール]
+- 基本的にまっさらなスタイルに初期化する内容にする．
+- 汎用的に使えるスタイル適用のclass属性の作成をしても良い．
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  width: 100%;
+  height: 100%;
+  font-family: "メイリオ", Arial, sans-serif;
+  font-size: 16px;
+  background-color: #fff;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // height: 100%;
+  min-height: 100vh;
+  background: #eee;
+}
+
+.reset-btn {
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+.reset-a {
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.flex-mid {
+  display: flex;
+  justify-content: center;
+}
+
+.flexW {
+  /*
+  display:flexを持つ要素の子要素にこのクラスを適用すると，可変長幅の子要素ができる．
+  固定長幅の子要素にする場合は，ダミーの.fixedWを適用して，適用した要素の子要素のwidthにpxを指定．
+  */
+  flex: 1;
+}
+.fixedW { /* ダミー */ }

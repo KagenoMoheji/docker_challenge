@@ -1,12 +1,12 @@
 import { useState } from "react";
 import reactLogo from "~/assets/svg/react.svg";
-import "~/components/pages/App/App.scss";
+import "~/components/pages/Top/Top.scss";
 
-export function App(): JSX.Element {
+export const Top = (): JSX.Element => {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="comp-app">
+    <div className="comp-top">
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           {/*
@@ -25,7 +25,7 @@ export function App(): JSX.Element {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit <code>src/Top.tsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
@@ -33,4 +33,4 @@ export function App(): JSX.Element {
       </p>
     </div>
   );
-}
+};
