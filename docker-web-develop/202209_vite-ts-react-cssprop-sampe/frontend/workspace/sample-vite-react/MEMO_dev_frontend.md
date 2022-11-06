@@ -18,7 +18,10 @@
         - build結果において`replace=false`のブラウザバック有効化が効いてない気がするな
             - あれ，devでは`replace=false`，buildでは`replace=true`でブラウザバック有効になる…なんで逆…？
         - favicon表示されない
-    - [ ] Header+Outletの
+    - [x] Header+Outletのところ
+        - Headerでハンバーガーサイドメニュー入れたい
+        - tailwindcssを使ったHeader/csspropを使ったHeader
+        - Header実装時にコンポーネントサンドボックスのルーティングとbase.scss追加
 - [ ] GraphQLモック
     - れんの方でできてないらしいこと
         - importエイリアス付きでApolloとmswの両方起動
