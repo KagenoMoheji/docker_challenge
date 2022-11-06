@@ -58,6 +58,7 @@ npm install \
     react-router-dom \
     react-markdown \
     # react-redux \
+    react-icons
     # @babel/core \ # Storybookが自動で入れる
     # @storybook/addon-actions \ # Storybookが自動で入れる
     # @storybook/addon-essentials \ # Storybookが自動で入れる
