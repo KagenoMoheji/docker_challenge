@@ -1,6 +1,7 @@
 /*
 - Refs
   - https://zenn.dev/ciffelia/articles/a42434cd8c1abc
+  - https://b.0218.jp/202111152315.html
 */
 const common = require("./.stylelintrc.common.cjs");
 

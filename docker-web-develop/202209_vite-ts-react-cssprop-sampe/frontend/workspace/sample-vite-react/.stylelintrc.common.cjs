@@ -18,7 +18,7 @@ module.exports = {
       - https://stylelint.io/user-guide/rules/list/selector-class-pattern/
       - https://stylelint.io/user-guide/rules/regex/
     */
-    "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*(--[a-z0-9]+)?$",
+    "selector-class-pattern": "^([a-z][a-zA-Z0-9]*)(-[a-zA-Z0-9]+)*(--[a-zA-Z0-9]+)?$",
     "scss/at-rule-no-unknown": [
       true,
       {
