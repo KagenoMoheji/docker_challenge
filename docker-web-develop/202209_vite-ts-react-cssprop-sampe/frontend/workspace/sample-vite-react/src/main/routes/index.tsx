@@ -8,7 +8,9 @@ import {
 } from "react-router-dom";
 import {SamplesRouteElement, SamplesRoute} from "~/routes/samples";
 import {ErrorsRouteElement, ErrorsRoute} from "~/routes/errors";
-import {App} from "~/components/pages/App/App";
+import {CompSandboxRouteElement, CompSandboxRoute} from "~/routes/compsandbox";
+import {Top} from "~/components/pages/Top/Top";
+import {HeaderRouter} from "~/components/templates/HeaderRouter";
 /*
 - Refs
   - https://www.webopixel.net/javascript/1773.html
@@ -19,7 +21,7 @@ import {App} from "~/components/pages/App/App";
 const routes: RouteObject[] = [
   {
     path: "/",
-    element: <App />, // TODO: Topに置き換えたい
+    element: <Top />,
     // children: [
     //   // children内のルーティングは，elementで指定したコンポーネント内でOutletを呼び出す形でページ切り替えするもの．つまりページ全体を切り替える場合はchildrenにすべきではない．
     //   {
@@ -45,21 +47,38 @@ const routes: RouteObject[] = [
     children: ErrorsRoute,
   },
   {
+    // コンポーネント実装用ルーティング
+    path: "/compsandbox",
+    element: <CompSandboxRouteElement />,
+    children: CompSandboxRoute,
+  },
+  {
     // 存在しないルーティングされたら404画面へリダイレクト
     // `replace = false`で2回ブラウザバックで戻れる
+    // TODO: 本当は`replace = false`で2回ブラウザバックで戻れる仕様のはずだが，devではfalse，prodではtrueにしないとブラウザバックしない．バグか？
     path: "*",
-    element: <Navigate to="/errors/404" replace={false} />,
+    element: <Navigate to="/errors/404" replace={!(process.env.NODE_ENV === "development")} />,
   },
 ];
-export const Root = (): JSX.Element => {
+
+export const App = (): JSX.Element => {
   // const Router = (): ReactElement<any, string | JSXElementConstructor<any>> | null => useRoutes(routes); // any型で怒られるのでJSX.Element型でぼかす．
   const Router = (): JSX.Element => useRoutes(routes) as JSX.Element;
-  return (
-    <BrowserRouter>
-      {/* TODO: ここでHeaderRouterテンプレートを呼んで，HeaderRouter内でOutlet使いたい */}
-      <Router />
-    </BrowserRouter>
-  );
+  const currPath = location.pathname;
+  const regpttn = /^\/compsandbox\/.+$/;
+  return process.env.NODE_ENV === "development" && currPath.match(regpttn) === null
+    ? (
+      <BrowserRouter>
+        <HeaderRouter />
+        <Router />
+      </BrowserRouter>
+    )
+    : (
+      // コンポーネント実装用ルーティングコンポーネント
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    );
 };
 
 
