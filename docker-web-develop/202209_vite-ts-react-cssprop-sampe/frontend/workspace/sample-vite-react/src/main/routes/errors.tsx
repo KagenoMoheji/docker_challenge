@@ -38,8 +38,8 @@ export const ErrorsRouteElement = (): JSX.Element => {
     `navigate()`は`useEffect()`の中で使わないと「You should call navigate() in a React.useEffect(), not when your component is first rendered」と怒られて機能しない．
     */
     if (currPath.match(regpttn) === null) {
-      // TODO: devモードでは`replace: false`，buildモードでは`replace: true`でブラウザバック有効になる・・・．いや逆になるなよ，なんで？
-      navigate("/errors/404", {replace: true});
+      // TODO: 本当は`replace = false`で2回ブラウザバックで戻れる仕様のはずだが，devではfalse，prodではtrueにしないとブラウザバックしない．バグか？
+      navigate("/errors/404", {replace: (process.env.NODE_ENV === "development")});
     }
     // ルーティングの無限ループを避けるため`useEffect()`の空の第2引数を許容
     // https://qiita.com/kobayang/items/88a104c0be28e16e65e8

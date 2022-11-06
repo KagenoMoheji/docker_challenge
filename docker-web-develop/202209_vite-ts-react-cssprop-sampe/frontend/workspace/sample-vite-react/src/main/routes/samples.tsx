@@ -6,8 +6,9 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import * as CSSProp from "~/components/pages/AppOfCSSPropInStyledComponent"; // TODO: ほんとはこの`* as`によるnamed exportの無意味化は良くない
-import * as StyledComponents from "~/components/pages/AppOfStyledComponent"; // TODO: ほんとはこの`* as`によるnamed exportの無意味化は良くない
+import {SampleCSSPropOfStyledComponent} from "~/components/pages/SampleCSSPropOfStyledComponent";
+import {SampleStyledComponent} from "~/components/pages/SampleStyledComponent";
+// import {SampleApolloClient} from "~/components/pages/SampleApolloClient";
 
 export const SamplesRouteElement = (): JSX.Element => {
   /*
@@ -29,8 +30,8 @@ export const SamplesRouteElement = (): JSX.Element => {
   const navigate = useNavigate();
   useEffect(() => {
     if (currPath.match(regpttn) === null) {
-      // TODO: devモードでは`replace: false`，buildモードでは`replace: true`でブラウザバック有効になる・・・．いや逆になるなよ，なんで？
-      navigate("/errors/404", {replace: true});
+      // TODO: 本当は`replace = false`で2回ブラウザバックで戻れる仕様のはずだが，devではfalse，prodではtrueにしないとブラウザバックしない．バグか？
+      navigate("/errors/404", {replace: !(process.env.NODE_ENV === "development")});
     }
     // ルーティングの無限ループを避けるため`useEffect()`の空の第2引数を許容
     // https://qiita.com/kobayang/items/88a104c0be28e16e65e8
@@ -42,10 +43,14 @@ export const SamplesRouteElement = (): JSX.Element => {
 export const SamplesRoute: RouteObject[] = [
   {
     path: "cssprop",
-    element: <CSSProp.App />,
+    element: <SampleCSSPropOfStyledComponent />,
   },
   {
     path: "styledcomponents",
-    element: <StyledComponents.App />,
+    element: <SampleStyledComponent />,
   },
+  // {
+  //   path: "apolloclient",
+  //   element: <SampleApolloClient />,
+  // },
 ];
