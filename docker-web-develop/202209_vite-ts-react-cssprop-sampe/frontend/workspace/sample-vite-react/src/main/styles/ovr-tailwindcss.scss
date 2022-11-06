@@ -1,0 +1,15 @@
+/*
+`@import "tailwindcss/components";`などをした後に呼び出してtailwindcssを上書きするCSS．
+*/
+
+.justify-end {
+  /* tailwindcssの.justify-endが効いてない気がするので代替． */
+  justify-content: end;
+}
+
+.break-words {
+  /* tailwindcss公式が設定しているCSSプロパティでは効かなかったので代替． */
+  // word-wrap: break-word; // 効かん
+  // overflow-wrap: break-word; // 効かん
+  word-break: break-all;
+}
