@@ -45,7 +45,7 @@ export const SampleShowYamlFromGithub = (): JSX.Element => {
     console.log(Object.prototype.toString.call(article.createDate));
   }
   return (
-    <div className="comp-processes">
+    <div className="comp-sampleshowyamlfromgithub">
       <div className="break-words" dangerouslySetInnerHTML={{__html: ((article instanceof Object && !(article instanceof Array)) && ("content" in article)) ? article.content.mission.replace(/(\r\n|\n|\r)/g, "<br>") : ""}} />
     </div>
   );
