@@ -7,6 +7,7 @@
 import yaml from "js-yaml";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import {useQueryStrings} from "~/utils/reacthooks/react-router-dom";
 
 type Article = {
   creator: string;
@@ -24,6 +25,7 @@ type Article = {
 
 export const SampleShowYamlFromGithub = (): JSX.Element => {
   const [ymlArticle, setYmlArticle] = useState<string>("");
+  const qstrs = useQueryStrings();
   useEffect(() => {
     axios.get("https://api.github.com/repos/KagenoMoheji/test/contents/hoge.yml", {})
       .then((res) => {
@@ -34,6 +36,7 @@ export const SampleShowYamlFromGithub = (): JSX.Element => {
       });
   }, []);
   console.log(ymlArticle);
+  console.log(qstrs.get("key"));
   /*
   - Refs
     - https://zenn.dev/team_zenn/articles/yaml-type-spec
