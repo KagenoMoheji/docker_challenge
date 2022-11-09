@@ -73,7 +73,8 @@ npm install \
 
 # 装飾関連
 npm install \
-    styled-components
+    styled-components \
+    tailwindcss
 npm install --save-dev \
     sass \
     stylelint \
@@ -81,7 +82,6 @@ npm install --save-dev \
     stylelint-config-prettier \
     stylelint-config-standard \
     stylelint-config-standard-scss \
-    tailwindcss \
     postcss \
     autoprefixer
 

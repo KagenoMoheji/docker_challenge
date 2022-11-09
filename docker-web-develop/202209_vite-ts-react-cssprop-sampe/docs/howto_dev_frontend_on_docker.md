@@ -834,7 +834,8 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
             1. 下記ライブラリをインストール
                 ```
                 npm install --save \
-                    tailwindcss \
+                    tailwindcss
+                npm install --save-dev \
                     postcss \
                     autoprefixer
                 ```
