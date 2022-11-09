@@ -1,4 +1,4 @@
 export type SVGProps = {
-  style?: {[name: string]: string};
-  className?: string;
+  styles?: {[name: string]: string};
+  classNames?: string;
 };

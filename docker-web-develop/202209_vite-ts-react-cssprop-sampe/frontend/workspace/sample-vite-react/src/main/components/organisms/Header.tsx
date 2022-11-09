@@ -147,7 +147,7 @@ export const Header = (): JSX.Element => {
                       <div className="flex flex-row justify-between items-center">
                         <div>Samples</div>
                         <div className="flex flex-row items-center ml-2.5">
-                          <DropdownArrow className="h-7" />
+                          <DropdownArrow classNames="h-7" />
                           {/*
                           こっちでも一応同じになる．
                           <FaChevronDown className="h-7" />
