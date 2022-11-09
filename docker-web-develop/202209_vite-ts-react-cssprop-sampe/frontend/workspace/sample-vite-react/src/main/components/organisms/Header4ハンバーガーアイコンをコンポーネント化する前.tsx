@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import {css} from "styled-components/macro";
 // import {FaChevronDown} from "react-icons/fa";
 import {DropdownArrow} from "~/components/atoms/DropdownArrow";
-import {HumbargerIcon} from "~/components/atoms/HumbargerIcon";
 
 export const Header = (): JSX.Element => {
   const refHumb = useRef<HTMLDivElement>(null);
@@ -84,8 +83,19 @@ export const Header = (): JSX.Element => {
             - TODO
               - ハンバーガーサイドメニューのコンポーネント化
             */}
-            <div className="humb-trigger h-full mdn:hidden flex justify-end items-center" onClick={(eve) => onClickHumb(eve)}>
-              <HumbargerIcon classNames={`z-[100] w-12 h-14 ${humbActive}`} />
+            <div className="humb-trigger h-full mdn:hidden flex justify-end items-center" onClick={eve => onClickHumb(eve)}>
+              {/*
+              ハンバーガーアイコン
+              ※スマホ版以外の時は非表示
+
+              - TODO
+                - ハンバーガーメニューアイコンのtailwindcss化
+              */}
+              <div className={`humb-icon h-full ${humbActive}`}>
+                <span className="humb-icon-line humb-icon-line-1"></span>
+                <span className="humb-icon-line humb-icon-line-2"></span>
+                <span className="humb-icon-line humb-icon-line-3"></span>
+              </div>
             </div>
             {/*
             - MEMO
@@ -175,7 +185,51 @@ export const Header = (): JSX.Element => {
 };
 
 const scopedStyles = {
-  cssHeader: css``,
+  cssHeader: css`
+.humb-trigger {
+  z-index: 100;
+  .humb-icon {
+    width: 50px; /* こっちでhumb-iconのサイズ決める． */
+    height: 50px; /* こっちでhumb-iconのサイズ決める． */
+    cursor: pointer;
+    position: relative;
+    .humb-icon-line {
+      position: absolute;
+      width: 85%; /* なんか右にはみ出てたので少し短くする． */
+      border: 2px solid #111;
+      background-color: #111;
+      transition: all 0.3s;
+    }
+    .humb-icon-line-1 {
+      top: 25%;
+    }
+    .humb-icon-line-2 {
+      top: 50%;
+    }
+    .humb-icon-line-3 {
+      top: 75%;
+    }
+    &.humb-active {
+      /* ハンバーガーメニューが開かれているときのスタイル */
+      .humb-icon-line {
+        border: 2px solid #111;
+      }
+      .humb-icon-line-1 {
+        top: 50%;
+        transform: rotate(45deg);
+      }
+      .humb-icon-line-2 {
+        width: 0;
+        border: none;
+      }
+      .humb-icon-line-3 {
+        top: 50%;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+`,
 };
 
 
