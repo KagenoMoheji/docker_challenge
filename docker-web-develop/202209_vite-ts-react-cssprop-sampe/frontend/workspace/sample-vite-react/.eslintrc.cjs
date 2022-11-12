@@ -94,6 +94,7 @@ module.exports = {
         },
       }
     ],
+    "space-infix-ops": ["error"], // 演算子の前後にスペースを入れよう
   },
   ignorePatterns: [
     // VSCodeによるアプリに関係ないコード(設定用など)の静的解析を無視させるために必要
