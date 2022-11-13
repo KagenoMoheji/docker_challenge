@@ -13,6 +13,7 @@
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
     "test": "npm run lint:eslint && jest",
+    "test:nolint": "jest",
     "test:coverage": "npm run lint:eslint && jest test --coverage",
     "lint:style": "stylelint 'src/**/*.{css,scss}' --config .stylelintrc.scss.cjs & stylelint 'src/**/*.{jsx,tsx}' --config .stylelintrc.cssinjs.cjs",
     "fix:scss": "stylelint --fix --config .stylelintrc.scss.cjs",
