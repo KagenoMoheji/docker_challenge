@@ -57,7 +57,9 @@ npm install \
     # react-dom \ # Viteアプリ立ち上げ時にデフォで入れられてたはず
     react-router-dom \
     react-markdown \
-    # react-redux \
+    react-redux \
+    # redux \ # これをインストールするのは古いやり方らしい
+    @reduxjs/toolkit \ # こっちが最近のやり方らしい
     react-icons
     # @babel/core \ # Storybookが自動で入れる
     # @storybook/addon-actions \ # Storybookが自動で入れる

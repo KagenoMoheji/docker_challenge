@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import {SampleCSSPropOfStyledComponent} from "~/components/pages/SampleCSSPropOfStyledComponent";
 import {SampleStyledComponent} from "~/components/pages/SampleStyledComponent";
+import {SampleReduxToolkit} from "~/components/pages/SampleReduxToolkit";
 // import {SampleApolloClient} from "~/components/pages/SampleApolloClient";
 
 export const SamplesRouteElement = (): JSX.Element => {
@@ -48,6 +49,10 @@ export const SamplesRoute: RouteObject[] = [
   {
     path: "styledcomponents",
     element: <SampleStyledComponent />,
+  },
+  {
+    path: "reduxToolkit",
+    element: <SampleReduxToolkit />,
   },
   // {
   //   path: "apolloclient",
