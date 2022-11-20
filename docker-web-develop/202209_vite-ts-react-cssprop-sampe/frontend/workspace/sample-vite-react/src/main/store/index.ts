@@ -67,5 +67,9 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 // Thunksを呼ぶには`react-redux.useDispatch`より下記を使った方が良い．
-// TODO: dispatchで呼ぶ側で「Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.」と出る．解消できてない．
+/*
+- TODO
+  - dispatchで呼ぶ側で「Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.」と出る．解消できてない．
+  - https://github.com/reduxjs/redux-toolkit/issues/2294#issuecomment-1112120536
+*/
 export const useAppDispatch: () => AppDispatch = useDispatch;
