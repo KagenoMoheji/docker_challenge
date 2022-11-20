@@ -133,7 +133,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
         npm install (--save-dev) {ライブラリ名}
         ```
         - TypeScript型系：@types/node，ts-node
-        - Reactライブラリ：react-router-dom，redux
+        - Reactライブラリ：react-router-dom，react-redux，@reduxjs/toolkit
         - ビルド系：後述
         - 静的解析系：後述
         - テスト系：後述
@@ -1052,6 +1052,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
                         "liveServer.settings.file": "./frontend/workspace/<PJまたはアプリ名>/dist/index.html",
                     }
                     ```
+        - react-reduxと@reduxjs/toolkitでReduxの実装を`{アプリ名}/src/main/store/`配下で実装
     1. TypeScriptをトランスパイル無しで実行したい場合があると思うので，実行できるよう簡易コマンドを`package.json`に追加
         ```
         "scripts": {

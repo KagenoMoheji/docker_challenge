@@ -22,6 +22,7 @@
         - Headerでハンバーガーサイドメニュー入れたい
         - tailwindcssを使ったHeader/csspropを使ったHeader
         - Header実装時にコンポーネントサンドボックスのルーティングとbase.scss追加
+- [x] Redux導入
 - [ ] GraphQLモック
     - れんの方でできてないらしいこと
         - importエイリアス付きでApolloとmswの両方起動
