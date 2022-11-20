@@ -56,6 +56,7 @@ reduxと使う方法と@reduxjs/toolkitを使う方法がある．
       - Thunkの呼び出しはその関数自体を指名する
 */
 import {configureStore} from "@reduxjs/toolkit";
+import {useDispatch} from "react-redux";
 import {sampleSlice} from "~/store/sample";
 // 下記のstoreをmain.tsxでimportし，`<react-redux.Provider store={store}></react-redux.Provider>`で渡せばOK.
 export const store = configureStore({
@@ -65,3 +66,6 @@ export const store = configureStore({
 });
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+// Thunksを呼ぶには`react-redux.useDispatch`より下記を使った方が良い．
+// TODO: dispatchで呼ぶ側で「Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator.」と出る．解消できてない．
+export const useAppDispatch: () => AppDispatch = useDispatch;

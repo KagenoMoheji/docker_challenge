@@ -1,9 +1,10 @@
-import {useSelector, useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 import {AiOutlineLoading} from "react-icons/ai";
+import {useAppDispatch} from "~/store";
 import {sampleSelectors, sampleActions, sampleThunks} from "~/store/sample";
 
 export const SampleReduxToolkit = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const count = useSelector(sampleSelectors.selectCount());
   const isLoading = useSelector(sampleSelectors.selectIsLoading());
   const CalcResult = (): JSX.Element => isLoading
