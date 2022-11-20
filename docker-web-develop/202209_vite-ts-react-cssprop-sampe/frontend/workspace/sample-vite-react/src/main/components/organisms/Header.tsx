@@ -162,6 +162,10 @@ export const Header = (): JSX.Element => {
                         <div className="mdx:px-20">SampleApolloClient</div>
                         <Link to="/samples/apolloclient" className="absolute top-0 left-0 w-full h-full" />
                       </li>
+                      <li className="px-4 py-4 relative flex flex-row items-center hover:bg-gray-500 hover:text-gray-100">
+                        <div className="mdx:px-20">SampleReduxToolkit</div>
+                        <Link to="/samples/reduxToolkit" className="absolute top-0 left-0 w-full h-full" />
+                      </li>
                     </ul>
                   </div>
                 </li>
