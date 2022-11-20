@@ -11,8 +11,8 @@ import {useQueryStrings} from "~/utils/reacthooks/react-router-dom";
 
 type Article = {
   creator: string;
-  createDate: Date;
-  updateDate: Date;
+  createDate: string;
+  updateDate: string;
   content: {
     mission: string;
     processes: Array<{
