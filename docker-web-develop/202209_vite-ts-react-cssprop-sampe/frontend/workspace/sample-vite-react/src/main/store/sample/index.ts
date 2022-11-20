@@ -15,9 +15,10 @@
 以下，@reduxjs/toolkitを使う方法．
 */
 import {createSlice} from "@reduxjs/toolkit";
-import {sampleInitState} from "~/store/sample/state";
+import {sampleInitState, SampleStateType} from "~/store/sample/state";
 import {sampleReducers} from "~/store/sample/reducers";
 export {sampleSelectors} from "~/store/sample/selectors";
+export {sampleThunks} from "~/store/sample/thunks";
 // 個人的にSliceの意味がわからんので，データ値ごとを格納するStore総括の意味でStoreにした方がわかり易くないか？
 export const sampleSlice = createSlice({
   name: "sample",
@@ -26,3 +27,5 @@ export const sampleSlice = createSlice({
 });
 // 以下でActionsを抽出
 export const sampleActions = sampleSlice.actions;
+// 状態の型の横流し
+export {type SampleStateType};

@@ -38,4 +38,7 @@ export const sampleReducers = {
   decrement: (state: SampleStateType, action: PayloadAction<{diff: number}>) => {
     state.count -= action.payload.diff;
   },
+  switchIsLoading: (state: SampleStateType, action: PayloadAction<{isLoading: boolean}>) => {
+    state.control.isLoading = action.payload.isLoading;
+  },
 };

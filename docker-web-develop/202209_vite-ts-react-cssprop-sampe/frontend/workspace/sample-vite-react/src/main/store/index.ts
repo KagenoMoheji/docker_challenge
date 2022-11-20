@@ -48,6 +48,12 @@ reduxと使う方法と@reduxjs/toolkitを使う方法がある．
   - https://zenn.dev/engstt/articles/293e7420c93a18#redux%E9%96%A2%E9%80%A3%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB
   - https://nomurabbit.hatenablog.jp/entry/20220122/1642834857
   - https://www.cyokodog.net/blog/redux-tookit/
+  - https://reffect.co.jp/react/redux-toolkit#Redux_Thunk-2
+    - VuexとReduxの概念を比較すると「Vuex.Actions=Redux.Thunks」・「Vuex.Mutations=Redux.Reducers」になるかも．
+      - Thunksは内外のSlicersのAction(・Thunks)を呼び出して組み合わせることができる(非同期)関数．
+    - useDispatch()による呼び出しについて
+      - ReduxのReducerの呼び出しはActionsを指名して経由する
+      - Thunkの呼び出しはその関数自体を指名する
 */
 import {configureStore} from "@reduxjs/toolkit";
 import {sampleSlice} from "~/store/sample";
