@@ -14,7 +14,11 @@ export const SampleReduxToolkit = (): JSX.Element => {
     <div className="comp-samplereduxtoolkit">
       <button onClick={() => dispatch(sampleActions.increment({diff: 1}))}>＋</button>
       <CalcResult />
-      <button onClick={() => dispatch(sampleThunks.slowDecrement({diff: 1}))}>－</button>
+      <button onClick={() => {
+        // Reduxにおける非同期のdispatcherを呼ぶ際は下記のようにeslintチェックの行レベル無効化しておく．一応動く．
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        dispatch(sampleThunks.slowDecrement({diff: 1}));
+      }}>－</button>
     </div>
   );
 };
