@@ -90,9 +90,9 @@ module.exports = {
           arrow: { // アロー関数のアローの前後はスペース入れよう
             before: true,
             after: true
-          }
+          },
         },
-      }
+      },
     ],
     "space-infix-ops": ["error"], // 演算子の前後にスペースを入れよう
   },
