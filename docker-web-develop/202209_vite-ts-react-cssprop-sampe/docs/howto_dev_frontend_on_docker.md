@@ -864,7 +864,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
                         },
                     }
                     ```
-            1. `{アプリ名}/src/main/plugins/tailwindcss.scss`を作成して下記内容を記述
+            1. `{アプリ名}/src/main/plugins/tailwindcss/styles.scss`を作成して下記内容を記述
                 ```
                 // 公式の下記の書き方だとVSCodeから警告でまくる
                 // // @tailwind base; // これ使うと装飾崩れまくる．tailwindcss専用の初期化処理でありtailwindcssのみ使い場合に限定して使うべきかも．
@@ -877,7 +877,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
                 ```
             1. `index.(css|scss)`の冒頭に下記を書く
                 ```
-                @import "plugins/styles/tailwindcss"; // tailwindcssを使わずstyled-components(css prop)を使うならこれをコメントアウト
+                @import "plugins/tailwindcss/styles"; // tailwindcssを使わずstyled-components(css prop)を使うならこれをコメントアウト
                 ```
             1. (`@tailwind`を使用する場合実施)`.stylelintrc.common.cjs`にて下記設定を追加
                 ```
