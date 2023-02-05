@@ -9,8 +9,9 @@ import {
 import {SamplesRouteElement, SamplesRoute} from "~/routes/samples";
 import {ErrorsRouteElement, ErrorsRoute} from "~/routes/errors";
 import {CompSandboxRouteElement, CompSandboxRoute} from "~/routes/compsandbox";
+import {Header} from "~/components/organisms/Header";
+// import {Footer} from "~/components/organisms/Footer";
 import {Top} from "~/components/pages/Top/Top";
-import {HeaderRouter} from "~/components/templates/HeaderRouter";
 /*
 - Refs
   - https://www.webopixel.net/javascript/1773.html
@@ -69,8 +70,9 @@ export const App = (): JSX.Element => {
   return process.env.NODE_ENV === "development" && currPath.match(regpttn) === null
     ? (
       <BrowserRouter>
-        <HeaderRouter />
+        <Header />
         <Router />
+        {/* <Footer /> */}
       </BrowserRouter>
     )
     : (
