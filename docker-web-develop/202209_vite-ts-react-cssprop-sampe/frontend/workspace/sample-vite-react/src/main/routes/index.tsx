@@ -8,9 +8,11 @@ import {
 } from "react-router-dom";
 import {SamplesRouteElement, SamplesRoute} from "~/routes/samples";
 import {ErrorsRouteElement, ErrorsRoute} from "~/routes/errors";
+// import {ProjectsRouteElement, ProjectsRoute} from "~/routes/projects";
+import {ProjectArticle} from "~/components/pages/ProjectArticle";
 import {CompSandboxRouteElement, CompSandboxRoute} from "~/routes/compsandbox";
 import {Header} from "~/components/organisms/Header";
-// import {Footer} from "~/components/organisms/Footer";
+import {Footer} from "~/components/organisms/Footer";
 import {Top} from "~/components/pages/Top/Top";
 /*
 - Refs
@@ -42,6 +44,15 @@ const routes: RouteObject[] = [
     element: <SamplesRouteElement />,
     children: SamplesRoute,
   },
+  // {
+  //   path: "/projects",
+  //   element: <ProjectsRouteElement />,
+  //   children: ProjectsRoute,
+  // },
+  {
+    path: "/projects/:year/:id",
+    element: <ProjectArticle />,
+  },
   {
     path: "/errors",
     element: <ErrorsRouteElement />,
@@ -72,7 +83,7 @@ export const App = (): JSX.Element => {
       <BrowserRouter>
         <Header />
         <Router />
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     )
     : (

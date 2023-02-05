@@ -8,6 +8,11 @@ import {
 import {Header} from "~/components/organisms/Header";
 import {HeaderWithMemo} from "~/components/organisms/HeaderWithMemo";
 import {Header as Header2} from "~/components/organisms/Header2ドロップダウンの開け閉じの方法が違う";
+import {Processes} from "~/components/organisms/Processes";
+import {Carousel} from "~/components/organisms/Carousel";
+import {CircleImgTiles} from "~/components/organisms/CircleImgTiles";
+import {Footer} from "~/components/organisms/Footer";
+import {ProjectArticle} from "~/components/pages/ProjectArticle";
 
 export const CompSandboxRouteElement = (): JSX.Element => {
   /*
@@ -45,5 +50,58 @@ export const CompSandboxRoute: RouteObject[] = [
   {
     path: "HeaderWithMemo",
     element: <HeaderWithMemo />,
+  },
+  {
+    path: "Processes",
+    element: <Processes processes={[
+      {
+        process: "process1",
+        status: "completed",
+        detail: "完了した"
+      },
+      {
+        process: "process2",
+        status: "ongoing",
+        detail: "実施中実施中実施中実施中実施中\n実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中実施中"
+      },
+      {
+        process: "process3",
+        status: "untouched",
+      },
+    ]} />,
+  },
+  {
+    path: "Carousel",
+    element: <Carousel imgs={[
+      {
+        original: "https://avatars.githubusercontent.com/u/37401955?v=4",
+        thumbnail: "https://avatars.githubusercontent.com/u/37401955?v=4",
+      },
+    ]} />,
+  },
+  {
+    path: "CircleImgTiles",
+    element: <CircleImgTiles imgTiles={[
+      {
+        name: "Github",
+        imageLink: "ReactIcons/DevIcons/DiGithubBadge",
+      },
+      {
+        name: "KagenoMoheji",
+        imageLink: "https://avatars.githubusercontent.com/u/37401955?v=4",
+      },
+      {
+        name: "IconLoadError",
+        imageLink: "ReactIcons/DevIcons/GithubBadge",
+      },
+    ]} />,
+  },
+  {
+    path: "Footer",
+    element: <Footer />,
+  },
+  {
+    path: "ProjectArticle/:year/:id",
+    element: <ProjectArticle />,
   },
 ];
