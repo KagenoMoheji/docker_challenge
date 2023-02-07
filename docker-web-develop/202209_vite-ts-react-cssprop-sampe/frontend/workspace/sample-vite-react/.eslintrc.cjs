@@ -115,7 +115,7 @@ module.exports = {
     react: {
       // 「Warning: React version not specified in eslint-plugin-react settings.」非表示のため
       version: "detect"
-    }
+    },
   },
   // overrides: [
   //   // {
