@@ -41,6 +41,8 @@ module.exports = {
     "no-trailing-spaces": ["error"],
     "no-unsafe-finally": "error",
     "no-whitespace-before-property": "error",
+    "quote-props": "off",
+    "comma-dangle": ["error", "always-multiline"],
     "spaced-comment": [
       "error",
       "always",
