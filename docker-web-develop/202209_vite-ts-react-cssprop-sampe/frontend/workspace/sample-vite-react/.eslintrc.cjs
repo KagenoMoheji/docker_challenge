@@ -24,7 +24,7 @@ module.exports = {
     project: "./tsconfig.json",
     ecmaFeatures: {
       "jsx": true,
-    }
+    },
   },
   plugins: [
     "react",
