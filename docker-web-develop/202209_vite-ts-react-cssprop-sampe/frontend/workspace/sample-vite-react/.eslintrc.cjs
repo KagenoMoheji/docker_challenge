@@ -42,7 +42,7 @@ module.exports = {
     "no-unsafe-finally": "error",
     "no-whitespace-before-property": "error",
     "quote-props": "off",
-    "comma-dangle": ["error", "always-multiline"],
+    // "comma-dangle": ["error", "always-multiline"], // JSXの時邪魔だったので一旦コメントアウト
     "spaced-comment": [
       "error",
       "always",
