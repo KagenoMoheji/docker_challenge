@@ -42,7 +42,17 @@ module.exports = {
     "no-unsafe-finally": "error",
     "no-whitespace-before-property": "error",
     "quote-props": "off",
-    // "comma-dangle": ["error", "always-multiline"], // JSXの時邪魔だったので一旦コメントアウト
+    // JSXの時邪魔だったが下記リンクで解消
+    // https://eslint.org/docs/latest/rules/comma-dangle#options
+    // https://github.com/airbnb/javascript/issues/1169#issuecomment-259317257
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "functions": "never", // これでJSXによる戻り値の複数行を対象外にする
+      },
+    ],
     "spaced-comment": [
       "error",
       "always",
