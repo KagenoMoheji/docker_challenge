@@ -1078,6 +1078,7 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
                     - ダメポ
                 - https://zenn.dev/xxpiyomaruxx/articles/8a5ca4c6a473bc#%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E8%A7%A3%E6%B6%88
                     - ダメポ
+                - **絶対`tsx`モジュールで解決できるやつ！！**
         - Refs
             - https://zenn.dev/tak_iwamoto/articles/862527e69f544e
             - https://github.com/TypeStrong/ts-node/issues/1062#issuecomment-1028139483
@@ -1198,3 +1199,8 @@ Viteアプリディレクトリ作成済みの場合はここを飛ばす．
     - テスト成功: `{アプリ名}/src/__tests__/done_completed/`
     - テスト失敗: `{アプリ名}/src/__tests__/done_failed/`
 1. (念のため他の開発メンバーにテストパターンやテスト実施のダブルチェックしてもらう)
+
+
+### もしこうなったら
+- stylelintで「Error: Unknown severity: "undefined"」というエラーが出始めた
+    - stylelintを入れ直そう．
