@@ -1,0 +1,101 @@
+version: "3"
+
+services:
+  wf_server:
+    build:
+      context: .
+      dockerfile: ./docker/${APPNAME}/Dockerfile
+      args:
+        APPNAME: ${APPNAME}
+        DOCKER_TOOLS_HOST: ${DOCKER_TOOLS_HOST}
+        SHARED_WORKSPACE_HOST: ./${SHARED_WORKSPACE_HOST}
+        OS_VERSION: ${OS_VERSION}
+        HTTP_PROXY: ${HTTP_PROXY}
+        JAVA_INSTALLER_FNAME: ${JAVA_INSTALLER_FNAME}
+        JAVA_INSTALLER_DIR_HOST: ./${JAVA_INSTALLER_DIR_HOST}
+        JAVA_INSTALLER_DIR_CONTAINER: ${JAVA_INSTALLER_DIR_CONTAINER}
+        WF_INSTALLER_FNAME: ${WF_INSTALLER_FNAME}
+        WF_INSTALLER_DIR_HOST: ./${WF_INSTALLER_DIR_HOST}
+        WF_INSTALLER_DIR_CONTAINER: ${WF_INSTALLER_DIR_CONTAINER}
+        WF_APP_DIR_CONTAINER: ${WF_APP_DIR_CONTAINER}
+        WF_MNG_USER: ${WF_MNG_USER}
+        WF_MNG_PASSOWRD: ${WF_MNG_PASSOWRD}
+        PSQL_INSTALLER_FNAME: ${PSQL_INSTALLER_FNAME}
+        PSQL_INSTALLER_DIR_CONTAINER: ${PSQL_INSTALLER_DIR_CONTAINER}
+        PSQL_INSTALLER_DIR_HOST: ${PSQL_INSTALLER_DIR_HOST}
+        PSQL_SETUP_SQL_FNAME: ${PSQL_SETUP_SQL_FNAME}
+        PSQL_SETUP_SQL_DIR_CONTAINER: ${PSQL_SETUP_SQL_DIR_CONTAINER}
+        PSQL_SETUP_SQL_DIR_HOST: ${PSQL_SETUP_SQL_DIR_HOST}
+        PSQL_SETUP_DATA_DIR_CONTAINER: ${PSQL_SETUP_DATA_DIR_CONTAINER}
+        PSQL_SETUP_DATA_DIR_HOST: ${PSQL_SETUP_DATA_DIR_HOST}
+        PSQL_APP_DIR_CONTAINER: ${PSQL_APP_DIR_CONTAINER}
+        PSQL_DB_NAME: ${PSQL_DB_NAME}
+        PSQL_DB_USER: ${PSQL_DB_USER}
+        PSQL_DB_PASSWORD: ${PSQL_DB_PASSWORD}
+        PSQL_PORT: ${PSQL_PORT}
+        PSQL_TZ: ${PSQL_TZ}
+    image: ${APPNAME}
+    container_name: ${APPNAME}
+    ports:
+      # Wildfly管理者用？のポート
+      - ${WF_MNG_PORT}:${WF_MNG_PORT}
+      # Wildfly一般用？のポート
+      - ${WF_COMMON_PORT}:${WF_COMMON_PORT}
+      # PostgreSQLのポート
+      - ${PSQL_PORT}:${PSQL_PORT}
+    volumes:
+      # Dockerコンテナ環境構築系ツール
+      ## `/opt`について，`/opt`のまるごとマウントだと`/opt/java`などが置き換えられて消えてしまうので，ピンポイントでのマウントするように注意する．
+      - ./${DOCKER_TOOLS_HOST}:/opt/docker_tools
+      # TODO: この頭からのボリュームマウントが(インストールしたWildflyが上書きされて消えるとか無く)容易になるよう，Wildflyのインストール先をマウントする/appの外でやった方が良い．/optとか．というよりは，デプロイディレクトリをアプリディレクトリの外のマウント可能な場所に変更することをwildflyの設定で行うのが良いな．
+      # TODO: prod配下をrootに展開するマウント方法あるかな？
+      - ./${SHARED_WORKSPACE_HOST}/app:/app
+      # TODO: PostgreSQLのデータバックアップ
+    tty: true
+
+
+# [このDockerコンテナの使用上の注意事項]
+# - コンテナ上ではrootユーザになっている．権限つよつよになっていること留意．
+#   - 個人ユーザでログインするDockerコンテナの作成方法もあるが，ひとまず開発上では不要としている．
+# [イメージビルド＆コンテナ起動]
+# - `docker-compose up -d`
+# - イメージビルド時に，下記のためにホスト側のプロキシ(ユーザ・パスワードナシでもいけるっぽい．)も必要．http_proxy/https_proxyをexportすればいい．
+#   - Dockerイメージ取得
+#   - ※Docker for Mac上のプロキシ設定は不要でOK．
+# - イメージビルド時のログを取りたいときは`docker-compose up -d 2>&1 | tee ./docker_build.log`
+# - イメージビルドやコンテナ起動(主にENTRYPOINT)がうまくいかないときのエラーを調査するときは`docker-compose logs`
+# [コンテナログイン]
+# - `docker exec -it <コンテナ名> bash`
+# [コンテナログアウト]
+# - `exit`
+# [コンテナ停止]
+# - `docker-compose stop`
+# [コンテナ削除]
+# - `docker-compose down`
+# - イメージを作り直すなら`docker rmi <イメージ名>`もしてからビルドした方が良い．
+# - イメージビルドのキャッシュの削除は`docker builder prune`
+# [もしこうなったら]
+# - コンテナのpipenvを使うと「ImportError: cannot import name 'InstallCommand'」と出る．
+#   - pipenvが壊れている可能性あり．直前のバージョンに`pip install pipenv===<バージョン>`でダウングレードすると解決する．
+# - コンテナの`pip install`や`pipenv install`で「SSLError(SSLError(1, '[SSL: CERTIFICATE_VERIFY_FAILED]'))」と出る．
+#   - ホスト・コンテナの療法でプロキシ設定すること．前述と同じhttp_proxy/https_proxyのexportすればいい．
+#   - `(pipenv run python -m) pip install --trusted-host pypi.python.org --trusted-host pypi.org --trusted-host files.pythonhosted.org <ライブラリ名>`でインストールしてみる．
+# - `pipenv run python -m pip install --trusted-host ~~~~`のインストールだとPipfileにライブラリが登録されない
+#   - これは難題．
+#   - 上級者的に言うと，pipenvのコードをいじって`--trusted-host`を使えるようにして(lockファイルをスキップして)インストール＆Pipfileへの登録はできる．
+#     - `pipenv install --skip-lock <ライブラリ名>`
+# - 「failed to solve with frontend dockerfile.v0: failed to create LLB definition: failed to authorize: rpc error: code = Unknown desc = failed to fetch anoymous token: Get "https://auth.docker.io/token?～"」と出る
+#   - 社内プロキシを通れてないので，テザリングなど社外ネットに繋いでdockerビルドすること．
+# - 「407 Proxy Authentication Requested」と出る
+#   - プロキシ設定をする．前述と同じhttp_proxy/https_proxyをexportすればいい．
+# - CentOSのコンテナでyumを使って「Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=os&infra=container errror was 14: curl#6 - "Could not resolve host: mirrorlist.centos.org; Unknown error"」と怒られる．
+#   - `vi /etc/yum.repos.d/CentOS-Base.repo`で「[base]」にある「baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/」のコメントアウトを外すと解決する．
+#     - nmcliコマンドという方法があるみたいだが，CentOSコンテナにインストールされてなかったので却下した．
+#     - dnsやnameserverとかでの「8.8.8.8」の設定は不要だった
+# - ホスト側からコンテナのWebサーバ(今回はWildfly)にlocalhostでアクセスできない
+#   - https://qiita.com/amuyikam/items/01a8c16e3ddbcc734a46
+#     - `docker inspect <コンテナ名>`
+#     - `docker inspect <コンテナ名> --format "{{json .NetworkSettings.Ports}}"`
+# - https://qiita.com/backpaper0@github/items/8e7bded58765e85304ca#%E8%B5%B7%E5%8B%95
+#   - やはりWildfly起動時にホストを`0.0.0.0`に指定しないといけなかった
+
